@@ -4,16 +4,17 @@ import 'package:news/service/top_stories_service.dart';
 
 class HackerNewsCubit extends Cubit<TopStoriesState> {
   final NewsDataService hackerNewsService;
-
+  static const int _initialFetchLimit = 100; 
   HackerNewsCubit(this.hackerNewsService) : super(TopStoriesInitial());
 
-  void fetchTopStories() async {
+  void fetchTopStories({int limit = _initialFetchLimit}) async {
     try {
       emit(TopStoriesLoading());
 
       final topStories = await hackerNewsService.fetchLatestNews();
 
-      final toStoriesData = topStories.map((e) {
+      final limitedStories = topStories.take(limit);
+      final toStoriesData = limitedStories.map((e) {
         return hackerNewsService.fetchItemData(e);
       });
 
