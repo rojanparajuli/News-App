@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:news/animation/loading/loading_screen.dart';
 import 'package:news/bloc/new_stories/new_stories_cubit.dart';
 import 'package:news/bloc/new_stories/new_stories_state.dart';
@@ -35,10 +36,11 @@ class _NewStoriesScreenState extends State<NewStoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           'Latest News Stories',
-          style: TextStyle(
+          style: GoogleFonts.lora(
               fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
         ),
         backgroundColor: Colors.black87,
@@ -60,21 +62,21 @@ class _NewStoriesScreenState extends State<NewStoriesScreen> {
                   return Center(
                     child: Text(
                       'Error: ${snapshot.error}',
-                      style: const TextStyle(color: Colors.red),
+                      style:GoogleFonts.lora(color: Colors.red),
                     ),
                   );
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
+                  return  Center(
                     child: Text(
                       'No stories available',
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      style: GoogleFonts.lora(fontSize: 18, color: Colors.grey),
                     ),
                   );
                 } else {
                   final stories = snapshot.data!;
                   return RefreshIndicator(
-                    onRefresh: ()async{
-                      return  _cubit.fetchnewstories();
+                    onRefresh: () async {
+                      return _cubit.fetchnewstories();
                     },
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
@@ -82,60 +84,74 @@ class _NewStoriesScreenState extends State<NewStoriesScreen> {
                       itemBuilder: (context, index) {
                         final story = stories[index];
                         return GestureDetector(
-                          onTap: ()async{
-
-                            print(story.url);
-                                  print('hhhhh');
-                                  final Uri url = Uri.parse(story.url ?? '');
-                                  await launchUrl(url,
-                                      mode: LaunchMode.externalApplication);
-                          },
-                          child: Card(
-                            elevation: 4,
-                            margin: const EdgeInsets.symmetric(vertical: 6),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.all(10),
-                              title: Text(
-                                story.title ?? 'No Title',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.black87,
+                            onTap: () async {
+                              print(story.url);
+                              print('hhhhh');
+                              final Uri url = Uri.parse(story.url ?? '');
+                              await launchUrl(url,
+                                  mode: LaunchMode.externalApplication);
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(vertical: 6),
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.circular(8), 
+                                border: Border.all(
+                                    color: Colors
+                                        .grey.shade300), 
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.2),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(
+                                        0, 2), 
+                                  ),
+                                ],
+                              ),
+                              child: ListTile(
+                                contentPadding: EdgeInsets
+                                    .zero, 
+                                title: Text(
+                                  story.title ?? 'No Title',
+                                  style: GoogleFonts.lora(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(top: 6),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        story.by ?? 'Unknown Author',
+                                        style: GoogleFonts.lora(
+                                          fontSize: 14,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                      Text(
+                                        '${story.score} points',
+                                        style: GoogleFonts.lora(
+                                          fontSize: 14,
+                                          color: Colors.green.shade700,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.grey.shade600,
+                                  size: 16,
                                 ),
                               ),
-                              subtitle: Padding(
-                                padding: const EdgeInsets.only(top: 6),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      story.by ?? 'Unknown Author',
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black54,
-                                      ),
-                                    ),
-                                    Text(
-                                      '${story.score} points',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.green.shade700,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              trailing: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.grey.shade600,
-                                size: 16,
-                              ),
-                            ),
-                          ),
-                        );
+                            ));
                       },
                     ),
                   );
@@ -146,14 +162,14 @@ class _NewStoriesScreenState extends State<NewStoriesScreen> {
             return Center(
               child: Text(
                 'Error: ${state.message}',
-                style: const TextStyle(color: Colors.red),
+                style: GoogleFonts.lora(color: Colors.red),
               ),
             );
           }
-          return const Center(
+          return  Center(
             child: Text(
               'No data available',
-              style: TextStyle(fontSize: 18, color: Colors.grey),
+              style: GoogleFonts.lora(fontSize: 18, color: Colors.grey),
             ),
           );
         },

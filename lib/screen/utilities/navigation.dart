@@ -47,7 +47,7 @@ class NavigationScreen extends StatelessWidget {
         icon: const Icon(Icons.newspaper),
         title: "New Stories",
         activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.grey,
+        inactiveColorPrimary: Colors.black,
       ),
     ];
   }
