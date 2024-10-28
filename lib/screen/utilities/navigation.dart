@@ -13,11 +13,11 @@ class NavigationScreen extends StatelessWidget {
       context,
       screens: _buildScreens(),
       items: _navBarsItems(),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black, // Set background color to black
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
-      navBarStyle: NavBarStyle.style6,
+      navBarStyle: NavBarStyle.style3, // Minimalist style with black background
     );
   }
 
@@ -32,22 +32,22 @@ class NavigationScreen extends StatelessWidget {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        title: "Top Stories",
-        icon: const Icon(Icons.newspaper),
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.black,
+        title: "Top",
+        icon: const Icon(Icons.trending_up),
+        activeColorPrimary: Colors.white, // White for active icon/text color
+        inactiveColorPrimary: Colors.grey, // Light grey for inactive items
       ),
       PersistentBottomNavBarItem(
-        title: "Best Stories",
-        icon: const Icon(Icons.newspaper),
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.black,
+        title: "Best",
+        icon: const Icon(Icons.star),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(Icons.newspaper),
-        title: "New Stories",
-        activeColorPrimary: Colors.blue,
-        inactiveColorPrimary: Colors.black,
+        title: "New",
+        icon: const Icon(Icons.fiber_new),
+        activeColorPrimary: Colors.white,
+        inactiveColorPrimary: Colors.grey,
       ),
     ];
   }
