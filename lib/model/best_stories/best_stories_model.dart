@@ -1,17 +1,19 @@
-class TopStoriesData {
-    String? by;
+class BestStories {
+    String ?by;
     int? descendants;
-    int? id;
+    int ?id;
+    List<int>? kids;
     int? score;
-    int? time;
+    int ?time;
     String? title;
     String? type;
     String? url;
 
-    TopStoriesData({
+    BestStories({
         this.by,
         this.descendants,
         this.id,
+        this.kids,
         this.score,
         this.time,
         this.title,
@@ -19,15 +21,15 @@ class TopStoriesData {
         this.url,
     });
 
-    factory TopStoriesData.fromJson(Map<String, dynamic> json) => TopStoriesData(
+    factory BestStories.fromJson(Map<String, dynamic> json) => BestStories(
         by: json["by"],
         descendants: json["descendants"],
         id: json["id"],
+        kids: List<int>.from(json["kids"].map((x) => x)),
         score: json["score"],
         time: json["time"],
         title: json["title"],
         type: json["type"],
         url: json["url"],
     );
-
 }

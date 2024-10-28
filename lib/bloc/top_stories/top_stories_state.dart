@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:news/model/top_stories_data.dart';
+import 'package:news/model/top_stories/top_stories_data.dart';
 
 abstract class TopStoriesState extends Equatable {
   const TopStoriesState();
