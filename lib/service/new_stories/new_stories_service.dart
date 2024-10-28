@@ -2,13 +2,13 @@ import 'dart:convert';
 
 import 'package:news/constant/api.dart';
 import 'package:http/http.dart' as http;
-import 'package:news/model/best_stories/best_stories_model.dart';
+import 'package:news/model/new_stories/new_stories_model.dart';
 
-class BestStoriesService {
-  final String baseUrl = "${HackerApi.baseUrl}v0/beststories.json?print=pretty";
+class NewStoriesService {
+  final String baseUrl = "${HackerApi.baseUrl}v0/newstories.json?print=pretty";
   final String baseUrl1 = "${HackerApi.baseUrl}v0/item/";
 
-  Future<List<int>> fetchbeststories() async {
+  Future<List<int>> fetchnewstories() async {
     final response = await http.get(Uri.parse(baseUrl));
     print(response.body);
     print(response.statusCode);
@@ -30,13 +30,13 @@ class BestStoriesService {
     }
   }
 
-  Future<BestStories> fetchItemData(int id) async {
+  Future<NewStoriesData> fetchItemData(int id) async {
     final response = await http.get(Uri.parse('$baseUrl1$id.json'));
+        print("New storiesssssssssssssssssssssssssssssss${response.body}");
 
-    print('responseeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee${response.body}');
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-      return BestStories.fromJson(jsonResponse);
+      return NewStoriesData.fromJson(jsonResponse);
     } else {
       throw Exception('Failed to load latest news');
     }

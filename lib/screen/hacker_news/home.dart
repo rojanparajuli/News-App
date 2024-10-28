@@ -39,17 +39,9 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
-  Future<void> _refreshStories() async {
-    setState(() {
-      _fetchLimit = 99;
-    });
-    _fetchInitialStories();
-  }
-
   void _loadMoreStories() {
-    setState(() {
-      _fetchLimit += _fetchIncrement;
-    });
+    _fetchLimit += _fetchIncrement;
+    print('jjjjjjjjjjjj $_fetchLimit');
     context.read<HackerNewsCubit>().fetchTopStories(limit: _fetchLimit);
   }
 
@@ -64,13 +56,16 @@ class _HomepageState extends State<Homepage> {
       ),
       body: BlocBuilder<HackerNewsCubit, TopStoriesState>(
         builder: (context, state) {
-          if (state is TopStoriesLoading && _fetchLimit == 99) {
+          print('ttttttttttttt');
+          if (state is TopStoriesLoading) {
             return const Center(child: LoadingScreen());
           } else if (state is TopStoriesLoaded) {
             return _buildStoryList(state);
           } else if (state is TopStoriesError) {
             return _buildErrorState(state);
           }
+
+          print('unknown state $state');
           return const SizedBox();
         },
       ),
@@ -79,7 +74,9 @@ class _HomepageState extends State<Homepage> {
 
   Widget _buildStoryList(TopStoriesLoaded state) {
     return RefreshIndicator(
-      onRefresh: _refreshStories,
+      onRefresh: () async {
+        return context.read<HackerNewsCubit>().fetchTopStories(limit: 99);
+      },
       child: ListView.builder(
         controller: _scrollController,
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
@@ -104,8 +101,7 @@ class _HomepageState extends State<Homepage> {
     return GestureDetector(
       onTap: () async {
         final Uri url = Uri.parse(data.url ?? '');
-          await launchUrl(url, mode: LaunchMode.externalApplication);
-
+        await launchUrl(url, mode: LaunchMode.externalApplication);
       },
       child: Card(
         margin: const EdgeInsets.symmetric(vertical: 8),
@@ -115,7 +111,6 @@ class _HomepageState extends State<Homepage> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           leading: CircleAvatar(
-            
             backgroundColor: Colors.black,
             child: Text(
               '${index + 1}',

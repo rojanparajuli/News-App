@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/screen/best_news/best_stories_view.dart';
 import 'package:news/screen/hacker_news/home.dart';
+import 'package:news/screen/new_stories/new_stories_view.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class NavigationScreen extends StatelessWidget {
@@ -12,7 +13,7 @@ class NavigationScreen extends StatelessWidget {
       context,
       screens: _buildScreens(),
       items: _navBarsItems(),
-      backgroundColor: Colors.white, 
+      backgroundColor: Colors.white,
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
@@ -24,7 +25,7 @@ class NavigationScreen extends StatelessWidget {
     return [
       const Homepage(),
       const BestStoriesScreen(),
-      const Center(child: Text("Settings")),
+      const NewStoriesScreen(),
     ];
   }
 
@@ -32,19 +33,19 @@ class NavigationScreen extends StatelessWidget {
     return [
       PersistentBottomNavBarItem(
         title: "Top Stories",
-        icon: Icon(Icons.newspaper),
+        icon: const Icon(Icons.newspaper),
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.black,
       ),
       PersistentBottomNavBarItem(
         title: "Best Stories",
-        icon: Icon(Icons.newspaper),
+        icon: const Icon(Icons.newspaper),
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.black,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.settings),
-        title: "Settings",
+        icon: const Icon(Icons.newspaper),
+        title: "New Stories",
         activeColorPrimary: Colors.blue,
         inactiveColorPrimary: Colors.grey,
       ),

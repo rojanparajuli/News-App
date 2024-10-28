@@ -13,7 +13,7 @@ class HackerNewsCubit extends Cubit<TopStoriesState> {
 
       final topStories = await hackerNewsService.fetchLatestNews();
 
-      final limitedStories = topStories.take(10);
+      final limitedStories = topStories.take(limit);
       final toStoriesData = limitedStories.map((e) {
         return hackerNewsService.fetchItemData(e);
       });
