@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/bloc/top_stories/top_stories_state.dart';
-import 'package:news/service/top_stories_service.dart';
+import 'package:news/service/top_stories/top_stories_service.dart';
 
 class HackerNewsCubit extends Cubit<TopStoriesState> {
   final NewsDataService hackerNewsService;
@@ -13,10 +13,12 @@ class HackerNewsCubit extends Cubit<TopStoriesState> {
 
       final topStories = await hackerNewsService.fetchLatestNews();
 
-      final limitedStories = topStories.take(limit);
+      final limitedStories = topStories.take(10);
       final toStoriesData = limitedStories.map((e) {
         return hackerNewsService.fetchItemData(e);
       });
+
+      print('jhkkkkk $toStoriesData');
 
       final data = await Future.wait(toStoriesData);
 

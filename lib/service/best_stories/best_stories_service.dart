@@ -1,13 +1,14 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:news/constant/api.dart';
-import 'package:news/model/top_stories_data.dart';
 
-class NewsDataService {
-  final String baseUrl = "${HackerApi.baseUrl}v0/newstories.json?print=pretty";
+import 'package:news/constant/api.dart';
+import 'package:http/http.dart' as http;
+import 'package:news/model/best_stories/best_stories_model.dart';
+
+class BestStoriesService {
+  final String baseUrl = "${HackerApi.baseUrl}v0/beststories.json?print=pretty";
   final String baseUrl1 = "${HackerApi.baseUrl}v0/item/";
 
-  Future<List<int>> fetchLatestNews() async {
+  Future<List<int>> fetchbeststories() async {
     final response = await http.get(Uri.parse(baseUrl));
     print(response.body);
     print(response.statusCode);
@@ -15,25 +16,25 @@ class NewsDataService {
     if (response.statusCode == 200) {
       List<dynamic> jsonData = json.decode(response.body);
 
-       List<int> newsItems = jsonData.map((item) {
+      List<int> newsItems = jsonData.map((item) {
         if (item is int) {
-          return item; // Return the item if it's an int
+          return item;
         } else {
           throw Exception('Expected an int but got ${item.runtimeType}');
         }
       }).toList();
 
-      return newsItems; // Return the list of integers
+      return newsItems;
     } else {
       throw Exception('Failed to load latest news');
     }
   }
 
-  Future<TopStoriesData> fetchItemData(int id) async {
-   final response = await http.get(Uri.parse('$baseUrl1$id.json'));
+  Future<BestStories> fetchItemData(int id) async {
+    final response = await http.get(Uri.parse('$baseUrl1$id.json'));
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-      return TopStoriesData.fromJson(jsonResponse);
+      return BestStories.fromJson(jsonResponse);
     } else {
       throw Exception('Failed to load latest news');
     }
