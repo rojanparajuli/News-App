@@ -1,50 +1,53 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/bloc/navigation/navigation_convix.dart';
 import 'package:news/screen/best_news/best_stories_view.dart';
 import 'package:news/screen/hacker_news/home.dart';
+import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class NavigationScreen extends StatelessWidget {
   const NavigationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<NavigationCubit, int>(
-        builder: (context, selectedIndex) {
-          Widget page;
-          switch (selectedIndex) {
-            case 0:
-              page = const Homepage();
-              break;
-            case 1:
-              page = const BestStoriesScreen();
-              break;
-           
-            default:
-              page = const Homepage();
-          }
-          return page;
-        },
-      ),
-      bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Colors.white,
-        items: const [
-          TabItem(
-            icon: Icon(Icons.home, color: Colors.blue),
-            title: 'Home',
-          ),
-          TabItem(
-            icon: Icon(Icons.widgets),
-            title: 'Recent',
-          ),
-         
-        ],
-        initialActiveIndex: context.read<NavigationCubit>().state,
-        
-        onTap: (index) => context.read<NavigationCubit>().changeTab(index),
-      ),
+    return PersistentTabView(
+      context,
+      screens: _buildScreens(),
+      items: _navBarsItems(),
+      backgroundColor: Colors.white, 
+      handleAndroidBackButtonPress: true,
+      resizeToAvoidBottomInset: true,
+      stateManagement: true,
+      navBarStyle: NavBarStyle.style6,
     );
+  }
+
+  List<Widget> _buildScreens() {
+    return [
+      const Homepage(),
+      const BestStoriesScreen(),
+      const Center(child: Text("Settings")),
+    ];
+  }
+
+  List<PersistentBottomNavBarItem> _navBarsItems() {
+    return [
+      PersistentBottomNavBarItem(
+        title: "Top Stories",
+        icon: Icon(Icons.newspaper),
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.black,
+      ),
+      PersistentBottomNavBarItem(
+        title: "Best Stories",
+        icon: Icon(Icons.newspaper),
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.black,
+      ),
+      PersistentBottomNavBarItem(
+        icon: Icon(Icons.settings),
+        title: "Settings",
+        activeColorPrimary: Colors.blue,
+        inactiveColorPrimary: Colors.grey,
+      ),
+    ];
   }
 }

@@ -27,7 +27,7 @@ class _BestStoriesScreenState extends State<BestStoriesScreen> {
           "Best Stories",
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.indigo[900],
+        backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
       ),

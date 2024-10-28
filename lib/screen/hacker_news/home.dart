@@ -58,7 +58,7 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Top Stories", style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.indigo[900],
+        backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
       ),
@@ -115,7 +115,8 @@ class _HomepageState extends State<Homepage> {
           contentPadding:
               const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           leading: CircleAvatar(
-            backgroundColor: Colors.indigo[700],
+            
+            backgroundColor: Colors.black,
             child: Text(
               '${index + 1}',
               style: const TextStyle(color: Colors.white),
