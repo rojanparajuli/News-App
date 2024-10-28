@@ -13,11 +13,11 @@ class NavigationScreen extends StatelessWidget {
       context,
       screens: _buildScreens(),
       items: _navBarsItems(),
-      backgroundColor: Colors.black, // Set background color to black
+      backgroundColor: Colors.black,
       handleAndroidBackButtonPress: true,
       resizeToAvoidBottomInset: true,
       stateManagement: true,
-      navBarStyle: NavBarStyle.style3, // Minimalist style with black background
+      navBarStyle: NavBarStyle.style3,
     );
   }
 
@@ -34,8 +34,8 @@ class NavigationScreen extends StatelessWidget {
       PersistentBottomNavBarItem(
         title: "Top",
         icon: const Icon(Icons.trending_up),
-        activeColorPrimary: Colors.white, // White for active icon/text color
-        inactiveColorPrimary: Colors.grey, // Light grey for inactive items
+        activeColorPrimary: Colors.white, 
+        inactiveColorPrimary: Colors.grey, 
       ),
       PersistentBottomNavBarItem(
         title: "Best",
