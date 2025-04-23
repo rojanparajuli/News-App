@@ -1,0 +1,1 @@
+/home/rojan/Desktop/Flutter/News-App/build/app/intermediates/cxx/Debug/2b2u713f/obj/x86_64

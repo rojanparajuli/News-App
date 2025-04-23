@@ -1,0 +1,2 @@
+/home/rojan/Desktop/Flutter/News-App/android/app/.cxx/Debug/2b2u713f/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/rojan/Desktop/Flutter/News-App/android/app/.cxx/Debug/2b2u713f/armeabi-v7a/CMakeFiles/rebuild_cache.dir
